@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #password-criteria {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .criteria {
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .criteria.valid {
+            color: #00C851;
+        }
+        
+        .criteria.valid::first-letter {
+            content: "✓";
+        }
+        
+        .criteria.invalid {
+            color: #ff4444;
+        }
+        
+        .criteria.invalid::first-letter {
+            content: "✗";
+        }
+    </style>
+</head>
+<body>
+    <form action="#" method="post">
+        <fieldset>
+            <legend><marquee>Registration Form</marquee></legend>
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter Your Name" name="name" required><br>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter Your Email" name="email" required><br>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter Your Password" name="password" required onkeyup="updatePasswordStrength()"><br>
+                <div id="password-strength"></div>
+                <div id="password-criteria">
+                    <div class="criteria" id="length-check">✗ At least 8 characters</div>
+                    <div class="criteria" id="uppercase-check">✗ One uppercase letter</div>
+                    <div class="criteria" id="lowercase-check">✗ One lowercase letter</div>
+                    <div class="criteria" id="number-check">✗ One number</div>
+                    <div class="criteria" id="special-check">✗ One special character</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label><br>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label><br>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label><br>
+            </div>
+            <div class ="form-group">
+                <label for="country">Country:</label>
+                <select name="country" id="country">
+                <option value="VIETNAM">Vietnam</option>
+                <option value="BANGLADESH">Bangladesh</option>
+                <option value="INDIA">India</option>
+                <option value="NEPAL">Nepal</option>
+                <option value="PAKISTAN">Pakistan</option>
+            </select>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" placeholder="Enter Your Address" name="address"><br>
+            </div>
+
+            <div class="form-buttons">
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+            </div>
+
+            
+        </fieldset>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: rgb(17, 16, 16);
+    margin: 0;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background: rgba(54, 231, 163, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(54, 231, 163, 0.2);
+    max-width: 500px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(54, 231, 163, 0.3);
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+legend {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: rgb(17, 16, 16);
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 3px solid rgb(17, 16, 16);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgb(17, 16, 16);
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+/* Modern input styling */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid rgba(17, 16, 16, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: rgb(17, 16, 16);
+    box-shadow: 0 0 10px rgba(17, 16, 16, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Stylish radio buttons */
+.form-group input[type="radio"] {
+    display: none;
+}
+
+.form-group input[type="radio"] + label {
+    display: inline-block;
+    padding: 8px 20px;
+    margin: 0 10px 10px 0;
+    background: rgba(17, 16, 16, 0.1);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-group input[type="radio"]:checked + label {
+    background: rgb(17, 16, 16);
+    color: rgb(54, 231, 163);
+    transform: scale(1.05);
+}
+
+/* Modern button styling */
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.form-buttons input {
+    width: auto;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="submit"] {
+    background: rgb(17, 16, 16);
+    color: rgb(54, 231, 163);
+    flex: 2;
+}
+
+input[type="reset"] {
+    background: rgba(17, 16, 16, 0.1);
+    color: rgb(17, 16, 16);
+    flex: 1;
+}
+
+.form-buttons input:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(17, 16, 16, 0.2);
+}
+
+input[type="submit"]:hover {
+    background: rgba(17, 16, 16, 0.9);
+}
+
+/* Password strength indicator */
+#password-strength {
+    margin-top: 8px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.weak { background: #ff4444; color: white; }
+.moderate { background: #ffbb33; color: white; }
+.strong { background: #00C851; color: white; }
+.very-strong { background: rgb(17, 16, 16); color: rgb(54, 231, 163); }
+
+/* Success message styling */
+.success-message {
+    text-align: center;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
