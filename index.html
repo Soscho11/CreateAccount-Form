@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Secure user registration form with password strength validation">
+    <meta name="keywords" content="registration, sign up, user account, secure registration">
+    <meta name="author" content="Your Name">
+    <meta name="theme-color" content="#36E7A3">
+    
+    <title>User Registration | Secure Account Creation</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1000/1000946.png">
+    
+    <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Password Criteria Styles -->
     <style>
         #password-criteria {
             margin-top: 10px;
@@ -15,13 +27,16 @@
         .criteria {
             margin: 5px 0;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .criteria.valid {
             color: #00C851;
         }
         
-        .criteria.valid::first-letter {
+        .criteria.valid::before {
             content: "✓";
         }
         
@@ -29,71 +44,175 @@
             color: #ff4444;
         }
         
-        .criteria.invalid::first-letter {
+        .criteria.invalid::before {
             content: "✗";
         }
     </style>
 </head>
 <body>
-    <form action="#" method="post">
-        <fieldset>
-            <legend><marquee>Registration Form</marquee></legend>
-
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" placeholder="Enter Your Name" name="name" required><br>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="Enter Your Email" name="email" required><br>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="Enter Your Password" name="password" required onkeyup="updatePasswordStrength()"><br>
-                <div id="password-strength"></div>
-                <div id="password-criteria">
-                    <div class="criteria" id="length-check">✗ At least 8 characters</div>
-                    <div class="criteria" id="uppercase-check">✗ One uppercase letter</div>
-                    <div class="criteria" id="lowercase-check">✗ One lowercase letter</div>
-                    <div class="criteria" id="number-check">✗ One number</div>
-                    <div class="criteria" id="special-check">✗ One special character</div>
+    <main class="container">
+        <form action="#" method="post" id="registrationForm" autocomplete="off" novalidate>
+            <fieldset>
+                <legend class="form-title">Create Your Account</legend>
+                <div class="form-header">
+                    <h1>Hey Niqqa!
+                    <p class="form-description">Please fill in your information to create an account</p>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label>Gender:</label><br>
-                <input type="radio" id="male" name="gender" value="male">
-                <label for="male">Male</label><br>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female">Female</label><br>
-                <input type="radio" id="other" name="gender" value="other">
-                <label for="other">Other</label><br>
-            </div>
-            <div class ="form-group">
-                <label for="country">Country:</label>
-                <select name="country" id="country">
-                <option value="VIETNAM">Vietnam</option>
-                <option value="BANGLADESH">Bangladesh</option>
-                <option value="INDIA">India</option>
-                <option value="NEPAL">Nepal</option>
-                <option value="PAKISTAN">Pakistan</option>
-            </select>
-            </div>
-            <div class="form-group">
-                <label for="address">Address:</label>
-                <input type="text" id="address" placeholder="Enter Your Address" name="address"><br>
-            </div>
+            <section class="form-section personal-info">
+                <div class="form-group">
+                    <label for="name" class="required">Full Name:</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="Enter your full name" 
+                        required 
+                        pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                        aria-required="true"
+                        minlength="2"
+                        maxlength="50">
+                    <span class="form-hint">Enter your first and last name</span>
+                </div>
 
-            <div class="form-buttons">
-                <input type="submit" value="Submit">
-                <input type="reset" value="Reset">
-            </div>
+                <div class="form-group">
+                    <label for="email" class="required">Email Address:</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="example@domain.com" 
+                        required 
+                        aria-required="true"
+                        autocomplete="email">
+                    <span class="form-hint">We'll never share your email with anyone else</span>
+                </div>
 
-            
-        </fieldset>
-    </form>
+                <div class="form-group">
+                    <label for="password" class="required">Create Password:</label>
+                    <div class="password-container">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Create a strong password" 
+                            required 
+                            aria-required="true"
+                            onkeyup="updatePasswordStrength()"
+                            aria-describedby="password-criteria">
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                            <span class="icon">👁️</span>
+                        </button>
+                    </div>
+                    <div id="password-strength" role="alert" aria-live="polite"></div>
+                    <div id="password-criteria" class="password-requirements">
+                        <h4 class="criteria-title">Password Requirements:</h4>
+                        <div class="criteria" id="length-check">At least 8 characters</div>
+                        <div class="criteria" id="uppercase-check">One uppercase letter</div>
+                        <div class="criteria" id="lowercase-check">One lowercase letter</div>
+                        <div class="criteria" id="number-check">One number</div>
+                        <div class="criteria" id="special-check">One special character</div>
+                    </div>
+                </div>
+
+            <section class="form-section demographics">
+                <div class="form-group">
+                    <fieldset class="gender-fieldset">
+                        <legend>Gender</legend>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="male" name="gender" value="male">
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female">Female</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="other" name="gender" value="other">
+                                <label for="other">Other</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <label for="country" class="required">Country of Residence:</label>
+                    <select 
+                        name="country" 
+                        id="country" 
+                        required 
+                        aria-required="true">
+                        <option value="" disabled selected>Select your country</option>
+                        <option value="AFGHANISTAN">Afghanistan</option>
+                        <option value="BANGLADESH">Bangladesh</option>
+                        <option value="INDIA">India</option>
+                        <option value="NEPAL">Nepal</option>
+                        <option value="PAKISTAN">Pakistan</option>
+                        <option value="SRI LANKA">Sri Lanka</option>
+                        <option value="VIETNAM">Vietnam</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea 
+                        id="address" 
+                        name="address" 
+                        placeholder="Enter your complete address"
+                        rows="3"
+                        aria-describedby="address-hint"></textarea>
+                    <span id="address-hint" class="form-hint">Include street address, city, and postal code</span>
+                </div>
+
+                <section class="form-section submission">
+                    <div class="form-group consent-group">
+                        <div class="checkbox-wrapper">
+                            <input 
+                                type="checkbox" 
+                                id="terms" 
+                                name="terms" 
+                                required 
+                                aria-required="true">
+                            <label for="terms">
+                                I agree to the <a href="#" class="terms-link">Terms & Conditions</a> and <a href="#" class="privacy-link">Privacy Policy</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button 
+                            type="submit" 
+                            class="btn btn-primary"
+                            aria-label="Submit registration form">
+                            Create Account
+                        </button>
+                        <button 
+                            type="reset" 
+                            class="btn btn-secondary"
+                            aria-label="Clear form">
+                            Clear Form
+                        </button>
+                    </div>
+                </section>
+            </fieldset>
+        </form>
+
+        <footer class="form-footer">
+            <p>Already have an account? <a href="#" class="login-link">Log in</a></p>
+        </footer>
+    </main>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        // Toggle password visibility
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.querySelector('.icon').textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+    </script>
 </body>
 </html>
