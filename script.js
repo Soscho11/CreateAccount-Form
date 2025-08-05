@@ -69,16 +69,37 @@ function checkPasswordStrength(password) {
     return true;
 }
 
-// Show success message
+// Show success message and share data
 function showSuccessMessage() {
+    // Collect form data
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+        country: document.getElementById('country').value,
+        address: document.getElementById('address').value
+    };
+
+    // Convert to JSON for sharing
+    const jsonData = JSON.stringify(formData, null, 2);
+    
+    // Display success message with data
     const form = document.querySelector('form');
     form.innerHTML = `
         <div class="success-message" style="text-align: center; color: green;">
             <h2>Registration Successful!</h2>
             <p>Thank you for registering with us.</p>
+            <div style="margin: 20px; padding: 10px; background: #f5f5f5; text-align: left; white-space: pre; overflow: auto;">
+                <strong>Form Data:</strong>
+                <pre>${jsonData}</pre>
+            </div>
             <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px;">Register Another</button>
         </div>
     `;
+
+    // Also log to console for debugging
+    console.log('Form Data:', formData);
 }
 
 // Real-time password strength indicator
